@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Image Translation</title>
+<style>
+  body, html {
+    height: 100%;
+    margin: 0;
+    font-family: Arial, sans-serif;
+  }
+
+  .phone-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
+
+  .phone {
+    border: 16px solid #000;
+    border-radius: 36px;
+    width: 300px; /* You can adjust this */
+    height: 600px; /* You can adjust this */
+    overflow: hidden;
+    position: relative;
+    box-shadow: 5px 5px 15px rgba(0,0,0,0.5);
+    background-color: #ffd966; /* Screen background color */
+    display: flex;
+    flex-direction: column;
+  }
+
+  .app-header {
+    text-align: center;
+    margin: 30px 0 20px;
+    font-size: 24px;
+    font-weight: bold;
+  }
+
+  .select-image {
+    padding: 10px 20px;
+    text-align: center;
+    display: block;
+    margin: 10px auto; /* Center button horizontally */
+    width: 50%; /* Width of button */
+    border: none;
+    border-radius: 20px;
+    font-size: 16px;
+    cursor: pointer;
+    text-decoration: none; /* Remove underline from link */
+  }
+
+  .image-preview {
+    text-align: center;
+    flex-grow: 1; /* Occupy remaining space */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+    select {
+        padding: 10px 15px;
+        text-align: center;
+        display: block;
+        margin: 10px auto; /* Center button horizontally */
+        width: calc(100% - 20px); /* Adjusted for padding */
+        border-radius: 20px;
+        box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+        background: white;
+        font-size: 16px;
+        color: #555;
+    }
+
+    select:focus {
+        border-color: #007bff;
+        outline: none;
+        box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1), 0 0 8px rgba(0, 123, 255, 0.6);
+    }
+
+  .translation-display {
+    text-align: center;
+    font-size: 50px; /* Size of the camera icon */
+  }
+
+  textarea {
+    width: calc(100% - 40px); /* Full width minus padding */
+    height: 100px; /* Set a fixed height */
+    margin-bottom: 20px;
+    padding: 10px;
+    font-size: 16px;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+  }
+
+  .button {
+    background-color: blue;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    display: block;
+    margin: 10px auto; /* Center button horizontally */
+    width: 50%; /* Width of button */
+    border: none;
+    border-radius: 20px;
+    font-size: 16px;
+    cursor: pointer;
+    text-decoration: none; /* Remove underline from link */
+  }
+
+  .button:hover {
+    background-color: #0000ffcc;
+  }
+
+  .button:active {
+    background-color: #0000e6; /* Darken button when clicked */
+  }
+</style>
+<script>
+  function previewImage(event) {
+      var reader = new FileReader();
+      reader.onload = function() {
+          var imgElement = document.getElementById('imagePreview');
+          imgElement.src = reader.result;
+          imgElement.style.display = 'block';
+
+      }
+      reader.readAsDataURL(event.target.files[0]);
+  }
+</script>
+</head>
+<body>
+<div class="phone-container">
+  <div class="phone">
+    <div class="app-header">
+      Image Translation
+    </div>
+
+    <form action="/translate_image" method="post" enctype="multipart/form-data">
+        <div class="image-preview">
+            <img id="imagePreview" src="/static/test_images/{{ selected_image }}" alt="Selected Image" style="max-width:150%; max-height:150px;">
+        </div>
+        <div class="select-image">
+            <input type="file" name="image" id="imageInput" accept=".jpg, .jpeg, .png, .gif" capture="camera" onchange="previewImage(event)" required>
+        </div>
+        <select name="source_lang" id="source_lang">
+          {% for code, language in languages.items() %}
+              <option value="{{ code }}" {% if code == source_language or (not source_language and code == 'es') %}selected{% endif %}>
+                  {{ language }}
+              </option>
+          {% endfor %}
+        </select>
+        <div class="translation-display">
+            <textarea placeholder="Translated text" readonly>{{ translation | default('', true) }}</textarea>
+        </div>
+        <button type="submit" class="button">TRANSLATE</button>
+    </form>
+    <a href="/" class="button">BACK</a> <!-- Adjust the href to point to your actual back page -->
+  </div>
+</div>
+</body>
+</html>

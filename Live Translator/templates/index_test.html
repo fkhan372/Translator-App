@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Text Translation</title>
+<style>
+  body, html {
+    height: 100%;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #ffd966; /* Background color */
+  }
+
+  .phone-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
+
+  .phone {
+    border: 16px solid #000;
+    border-radius: 36px;
+    width: 300px; /* You can adjust this */
+    height: 600px; /* You can adjust this */
+    overflow: hidden;
+    position: relative;
+    box-shadow: 5px 5px 15px rgba(0,0,0,0.5);
+  }
+
+  .app-header {
+    text-align: center;
+    margin: 20px;
+    font-size: 24px;
+    font-weight: bold;
+  }
+
+  .text-area-container {
+    margin: 20px;
+  }
+
+  textarea {
+    width: calc(100% - 40px); /* Full width minus padding */
+    height: 100px; /* Set a fixed height */
+    margin-bottom: 20px;
+    padding: 10px;
+    font-size: 16px;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+  }
+  select {
+    padding: 10px 15px;
+    border: 2px solid #ccc;
+    margin: 10px 0;
+    width: calc(100% - 20px); /* Adjusted for padding */
+    border-radius: 20px;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+    background: white;
+    font-size: 16px;
+    color: #555;
+}
+
+select:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1), 0 0 8px rgba(0, 123, 255, 0.6);
+}
+
+
+  option {
+    padding: 10px; /* Add some padding to options for better readability */
+  }
+
+  .button {
+    background-color: #007bff; /* Bootstrap primary blue */
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    display: block;
+    margin: 10px auto 20px; /* Add some margin to the bottom as well */
+    width: 60%; /* Making button a bit narrower */
+    border: none;
+    border-radius: 20px;
+    font-size: 16px;
+    cursor: pointer;
+    text-decoration: none; /* Remove underline from link */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Add shadow for depth */
+  }
+
+  .button:hover {
+    background-color: #0056b3; /* A darker shade of blue for hover state */
+  }
+
+  .button:active {
+    background-color: #004080; /* An even darker shade for active/click state */
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2); /* Slightly reduce shadow for a pressed effect */
+  }
+
+</style>
+</head>
+<body>
+  <div class="phone-container">
+    <div class="phone">
+        <div class="app-header">Text Translation</div><hr>
+        <div class="text-area-container">
+            <form action="/translate" method="post">
+                <select name="source_lang" id="source_lang">
+                    <option value="" {% if detected_language is none %}selected{% endif %}>Detecting Language</option>
+                    {% for code, language in languages.items() %}
+                        <option value="{{ code }}" {% if code == detected_language %}selected{% endif %}>
+                            {{ language }}
+                        </option>
+                    {% endfor %}
+                </select>
+
+                <textarea name="text" placeholder="Enter text here..." required></textarea>
+                <select name="target_lang" id="target_lang">
+                  {% for code, language in languages.items() %}
+                      <option value="{{ code }}" {% if code == target_language %}selected{% endif %}>
+                          {{ language }}
+                      </option>
+                  {% endfor %}
+              </select>
+                <textarea placeholder="Translated text" readonly>{{ translation | default('', true) }}</textarea>
+                <button type="submit" class="button">TRANSLATE</button>
+            </form>
+            <a href="/index2.html" class="button">BACK</a> <!-- Updated link -->
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>

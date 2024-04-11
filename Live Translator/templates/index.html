@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Live Translator</title>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  body, html {
+    height: 100%;
+    margin: 0;
+    font-family: 'Open Sans', sans-serif;
+    background-color: #ffffff; /* Consider a less bright shade if it's too vivid */
+  }
+
+  .phone-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
+
+  .phone {
+    border: 16px solid #000;
+    border-radius: 36px;
+    width: 300px; /* You can adjust this */
+    height: 550px; /* You can adjust this */
+    overflow: hidden;
+    position: relative;
+    box-shadow: 5px 5px 15px rgba(0,0,0,0.5);
+    background: #ffd966;
+    padding: 20px;
+  }
+
+  .app-header {
+    text-align: center;
+    margin-bottom: 40px;
+    font-size: 30px;
+    font-weight: 600;
+    color: #333;
+  }
+
+  .options-list {
+    list-style-type: none;
+    padding: 0;
+  }
+
+  .options-list li {
+    background-color: #fff;
+    margin-bottom: 15px;
+    border-radius: 20px;
+    box-shadow: 1px 1px 5px rgba(0,0,0,0.2);
+    transition: box-shadow 0.3s ease;
+  }
+
+  .options-list li:hover {
+    box-shadow: 1px 1px 8px rgba(0,0,0,0.3);
+  }
+
+  .options-list a {
+    display: block;
+    text-decoration: none;
+    color: #333;
+    padding: 15px 20px;
+    border-radius: 20px;
+    font-size: 18px;
+    transition: background-color 0.3s ease;
+  }
+
+  .options-list a:hover {
+    background-color: #e6e6e6;
+  }
+
+</style>
+</head>
+<body>
+<div class="phone-container">
+    <div class="phone">
+      <div class="app-header">Live Translator</div>
+      <ul class="options-list">
+        <li><a href="index2.html">Text Translation</a></li>
+        <li><a href="index3.html">Image Translation</a></li>
+        <li><a href="index4.html">Voice Translation</a></li>
+      </ul>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Live Translator</title>
+<style>
+  body, html {
+    height: 100%;
+    margin: 0;
+    font-family: Arial, sans-serif;
+  }
+
+  .phone-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
+
+  .phone {
+    border: 16px solid #000;
+    border-radius: 36px;
+    width: 300px; /* You can adjust this */
+    height: 600px; /* You can adjust this */
+    overflow: hidden;
+    position: relative;
+    box-shadow: 5px 5px 15px rgba(0,0,0,0.5);
+    background-color: #ffd966; /* Screen background color */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* This will center the content vertically */
+    align-items: center; /* This will center the content horizontally */
+  }
+
+  .app-header {
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px; /* Space between the header and the button */
+  }
+
+  .next-button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 20px;
+    font-size: 16px;
+    cursor: pointer;
+    width: 80%; /* Width of button relative to its container */
+    text-align: center; /* Ensure text inside the button is centered */
+  }
+
+  .next-button:hover {
+    background-color: #0056b3;
+  }
+</style>
+</head>
+<body>
+<div class="phone-container">
+  <div class="phone">
+    <div class="app-header">
+      Live Translator
+    </div>
+    <a href="index2.html" class="next-button">Next Page</a>
+  </div>
+</div>
+</body>
+</html>
